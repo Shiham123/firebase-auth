@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
+import './main.css';
+
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import MainLayout from './Layout/mainlayout.jsx';
@@ -8,7 +10,8 @@ import HomePage from './pages/home.jsx';
 import LoginPage from './pages/loginPage.jsx';
 import Contact from './pages/contact.jsx';
 import GithubPage from './pages/githubLogin.jsx';
-import EmailLogin from './pages/emailLogin.jsx';
+import EmailLogin from './pages/Email/emailLogin.jsx';
+import EmailRegister from './pages/Email/emailRegister.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +22,8 @@ const router = createBrowserRouter([
       { path: '/login', element: <LoginPage /> },
       { path: '/contact', element: <Contact /> },
       { path: '/github', element: <GithubPage /> },
-      { path: '/email', element: <EmailLogin /> },
+      { path: '/eLogin', element: <EmailLogin /> },
+      { path: '/eRegister', element: <EmailRegister /> },
     ],
   },
 ]);
