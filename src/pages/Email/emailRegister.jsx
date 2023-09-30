@@ -1,10 +1,30 @@
-const handleSubmit = (event) => {
-  event.preventDefault();
-  console.log(event.target.email.value);
-  console.log(event.target.password.value);
-};
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import globalAuth from '../../firebase/firebase.init';
+import { useState } from 'react';
 
 const EmailRegister = () => {
+  const [registerError, setRegisterError] = useState('');
+  const [registerSuccess, setRegisterSuccess] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    setRegisterError('');
+    setRegisterSuccess('');
+
+    createUserWithEmailAndPassword(globalAuth, email, password)
+      .then((user) => {
+        console.log(user);
+        setRegisterSuccess('user created successfully');
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setRegisterError(error.message);
+      });
+  };
+
   return (
     <div className="flex justify-center items-center">
       <form action="" onSubmit={handleSubmit}>
@@ -39,6 +59,8 @@ const EmailRegister = () => {
         </div>
         <button className="btn">Submit</button>{' '}
       </form>
+      {registerError && <p>{registerError}</p>}
+      {registerSuccess && <p>{registerSuccess}</p>}
     </div>
   );
 };
