@@ -1,10 +1,12 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import globalAuth from '../../firebase/firebase.init';
 import { useState } from 'react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const EmailRegister = () => {
   const [registerError, setRegisterError] = useState('');
   const [registerSuccess, setRegisterSuccess] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -50,11 +52,18 @@ const EmailRegister = () => {
           <label className="input-group">
             <span>Password</span>
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               placeholder="password"
               className="input input-bordered"
               name="password"
             />
+            <span
+              onClick={() => {
+                setShowPassword(!showPassword);
+              }}
+            >
+              {showPassword ? <FaEye /> : <FaEyeSlash />}
+            </span>
           </label>
         </div>
         <button className="btn">Submit</button>{' '}
